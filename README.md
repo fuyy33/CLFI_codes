@@ -1,2 +1,2 @@
 # CLFI_codes
-Spatiotemporal patterns analysis of crop landscape fragmentation
+“SD_PD_MPA.m” and “CLFI_caculate” are the codes used for calculating the CLFI. “MKtest.m” is the code for analyzing the trend of the CLFI, while “XGBoost.py” is used to explore the main drivers of crop landscape fragmentation. Additionally, “CA_CLFI_pattern_classify.m” is the code for identifying crop landscape patterns based on a two-dimensional framework that integrates long-term trends in CA and CLFI.
