@@ -99,10 +99,10 @@ for t = nonzero_thresholds
 
 
     tag = sprintf('nonzero_lt%d', t);
-    geotiffwrite(fullfile(outpath, [tag '_Maize_SCFI_Sen_2024.tif']), sen_slope, R, 'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
-    geotiffwrite(fullfile(outpath, [tag '_Maize_SCFI_Z_2024.tif']), z_value, R, 'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
-    geotiffwrite(fullfile(outpath, [tag '_Maize_SCFI_Trend_int16_2024.tif']), int16(trend), R, 'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
-    geotiffwrite(fullfile(outpath, [tag '_Maize_SCFI_Trend_2024.tif']), single(trend), R, 'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
+    geotiffwrite(fullfile(outpath, [tag '_Maize_CLFI_Sen_2024.tif']), sen_slope, R, 'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
+    geotiffwrite(fullfile(outpath, [tag '_Maize_CLFI_Z_2024.tif']), z_value, R, 'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
+    geotiffwrite(fullfile(outpath, [tag '_Maize_CLFI_Trend_int16_2024.tif']), int16(trend), R, 'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
+    geotiffwrite(fullfile(outpath, [tag '_Maize_CLFI_Trend_2024.tif']), single(trend), R, 'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
 
     sig_class_values = [-2, -1, 0, 1, 2];
     sig_class_names = {
@@ -123,7 +123,7 @@ for t = nonzero_thresholds
         sig_counts(:), ...
         sig_percentages(:), ...
         'VariableNames', {'Type', 'pixel_num', 'proportion(%)'});
-    outputExcel = fullfile(outpath,  '3', sprintf('SCFI_Trend_Proportion_lt%d_sig2_2024.xlsx', t));
+    outputExcel = fullfile(outpath,  '3', sprintf('CLFI_Trend_Proportion_lt%d_sig2_2024.xlsx', t));
     writetable(sig_result_table, outputExcel, 'Sheet', 'Maize');
 
 end

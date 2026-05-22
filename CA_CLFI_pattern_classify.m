@@ -3,21 +3,21 @@ clear;clc
 outpath = '';
 [FC_trend, R] = readgeoraster('');
 info = geotiffinfo('');
-SCFI_trend = readgeoraster('');
+clfi_trend = readgeoraster('');
 
 
 [nRows, nCols] = size(FC_trend);
 landscape_type = nan(nRows, nCols,'single');
 % fc_trend=nan(nRows, nCols,'single');
-scfi_trend = nan(nRows, nCols,'single');
+clfi_trend = nan(nRows, nCols,'single');
 
 MyPar = parpool('local',15);
 parfor i = 1:nRows
     for j = 1:nCols
         fc = FC_trend(i,j);
-        scfi = SCFI_trend(i,j);
+        clfi = clfi_trend(i,j);
 
-        if isnan(fc) || isnan(scfi)
+        if isnan(fc) || isnan(clfi)
             continue;
         end
 
@@ -32,33 +32,33 @@ parfor i = 1:nRows
             continue;
         end
 
-        if scfi == 2  
-            scfi_trend = 1;
-        elseif scfi == -2  
-            scfi_trend = -1;
-        elseif scfi == -1|| scfi == 1  || scfi == 0 
-            scfi_trend = 0;
+        if clfi == 2  
+            clfi_trend = 1;
+        elseif clfi == -2  
+            clfi_trend = -1;
+        elseif clfi == -1|| clfi == 1  || clfi == 0 
+            clfi_trend = 0;
         else
             continue;
         end
 
-        if fc_trend == 1 && scfi_trend == -1  % CA↑CLFI↓
+        if fc_trend == 1 && clfi_trend == -1  % CA↑CLFI↓
             landscape_type(i,j) = 1;   
-        elseif fc_trend == 1 && scfi_trend == 1  % CA↑CLFI↑
+        elseif fc_trend == 1 && clfi_trend == 1  % CA↑CLFI↑
             landscape_type(i,j) = 2; 
-        elseif fc_trend == -1 && scfi_trend == 1 %  CA↓CLFI↑
+        elseif fc_trend == -1 && clfi_trend == 1 %  CA↓CLFI↑
             landscape_type(i,j) = 3; 
-        elseif fc_trend == -1 && scfi_trend == -1 % CA↓CLFI↓
+        elseif fc_trend == -1 && clfi_trend == -1 % CA↓CLFI↓
             landscape_type(i,j) = 4; 
-        elseif fc_trend == 0 && scfi_trend == 1 % CA→CLFI↑
+        elseif fc_trend == 0 && clfi_trend == 1 % CA→CLFI↑
             landscape_type(i,j) = 5; 
-        elseif fc_trend == 0 && scfi_trend == -1 % CA→CLFI↓
+        elseif fc_trend == 0 && clfi_trend == -1 % CA→CLFI↓
             landscape_type(i,j) = 6; 
-        elseif fc_trend == 1 && scfi_trend == 0 % CA↑CLFI→
+        elseif fc_trend == 1 && clfi_trend == 0 % CA↑CLFI→
             landscape_type(i,j) = 7; 
-        elseif fc_trend == -1 && scfi_trend == 0 % CA↓CLFI→
+        elseif fc_trend == -1 && clfi_trend == 0 % CA↓CLFI→
             landscape_type(i,j) = 8; 
-        elseif fc_trend == 0 && scfi_trend == 0 % CA→CLFI→
+        elseif fc_trend == 0 && clfi_trend == 0 % CA→CLFI→
             landscape_type(i,j) = 9; 
         end 
     end
